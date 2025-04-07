@@ -3,7 +3,7 @@
 import pandas as pd
 import ta
 
-def run_strategy_simulation(data, initial_investment, strategy):
+def run_strategy_simulation(data: pd.DataFrame, initial_investment: float, strategy: str) -> dict:
     """
     Run different investment strategies simulation
     
@@ -15,67 +15,76 @@ def run_strategy_simulation(data, initial_investment, strategy):
     Returns:
         dict: Dictionary containing simulation results
     """
-    result = {
+    required_columns = ['Close']
+    if not all(col in data.columns for col in required_columns):
+        raise ValueError(f"Data missing required columns: {required_columns}")
+        
+    valid_strategies = ["Buy and Hold", "Moving Average Crossover", "RSI Strategy"]
+    if strategy not in valid_strategies:
+        raise ValueError(f"Invalid strategy. Choose from: {valid_strategies}")
+    
+    df = data.copy()
+
+    results = {
         'strategy': strategy,
         'initial_investment': initial_investment,
-        'start_date': data.index[0],
-        'end_date': data.index[-1],
-        'positions': [],
-        'portfolio_value': []
+        'start_date': df.index[0],
+        'end_date': df.index[-1],
+        'final_value': 0,
+        'return_pct': 0,
+        'annualized_return': 0,
+        'buy_hold_return': 0,
+        'trades': [],
+        'portfolio_values': [],
+        'dates': []
     }
 
     cash = initial_investment
-    shares = 0
-    
-    trades = []
-    
+    shares = 0.0
     portfolio_values = []
     dates = []
-
+    trades = []
+    
     if strategy == "Buy and Hold":
-        start_price = data['Close'].iloc[0]
+        start_price = df['Close'].iloc[0]
         shares = cash / start_price
         cash = 0
-
+        
         trades.append({
-            'date': data.index[0],
+            'date': df.index[0],
             'action': 'BUY',
             'price': start_price,
             'shares': shares,
             'value': shares * start_price
         })
-
-        for date, row in data.iterrows():
+        
+        for date, row in df.iterrows():
             portfolio_value = shares * row['Close']
             portfolio_values.append(portfolio_value)
             dates.append(date)
-
-        end_price = data['Close'].iloc[-1]
+        
+        end_price = df['Close'].iloc[-1]
         trades.append({
-            'date': data.index[-1],
+            'date': df.index[-1],
             'action': 'SELL',
             'price': end_price,
             'shares': shares,
             'value': shares * end_price
         })
-        
+
     elif strategy == "Moving Average Crossover":
-        if 'MA20' not in data.columns or 'MA50' not in data.columns:
-            data['MA20'] = data['Close'].rolling(window=20).mean()
-            data['MA50'] = data['Close'].rolling(window=50).mean()
+        df['MA20'] = df['Close'].rolling(window=20).mean()
+        df['MA50'] = df['Close'].rolling(window=50).mean()
         
-        position = 'OUT'
-        
-        for i, (date, row) in enumerate(data.iterrows()):
+        for i, (date, row) in enumerate(df.iterrows()):
             if i < 50:
                 portfolio_values.append(cash)
                 dates.append(date)
                 continue
-            if row['MA20'] > row['MA50'] and position == 'OUT':
+            
+            if row['MA20'] > row['MA50'] and cash > 0:
                 shares = cash / row['Close']
                 cash = 0
-                position = 'IN'
-                
                 trades.append({
                     'date': date,
                     'action': 'BUY',
@@ -83,10 +92,10 @@ def run_strategy_simulation(data, initial_investment, strategy):
                     'shares': shares,
                     'value': shares * row['Close']
                 })
-            
-            elif row['MA20'] < row['MA50'] and position == 'IN':
-                cash = shares * row['Close']
                 
+            elif row['MA20'] < row['MA50'] and shares > 0:
+                cash = shares * row['Close']
+                shares = 0
                 trades.append({
                     'date': date,
                     'action': 'SELL',
@@ -94,31 +103,22 @@ def run_strategy_simulation(data, initial_investment, strategy):
                     'shares': shares,
                     'value': cash
                 })
-                
-                shares = 0
-                position = 'OUT'
-
-            portfolio_value = cash + (shares * row['Close'])
-            portfolio_values.append(portfolio_value)
+            
+            portfolio_values.append(cash + shares * row['Close'])
             dates.append(date)
-    
+
     elif strategy == "RSI Strategy":
-        if 'RSI' not in data.columns:
-            data['RSI'] = ta.momentum.RSIIndicator(data['Close']).rsi()
+        df['RSI'] = ta.momentum.RSIIndicator(df['Close']).rsi()
         
-        position = 'OUT' 
-        
-        for i, (date, row) in enumerate(data.iterrows()):
+        for i, (date, row) in enumerate(df.iterrows()):
             if i < 14 or pd.isna(row['RSI']):
                 portfolio_values.append(cash)
                 dates.append(date)
                 continue
-
-            if row['RSI'] < 30 and position == 'OUT':
+            
+            if row['RSI'] < 30 and cash > 0:
                 shares = cash / row['Close']
                 cash = 0
-                position = 'IN'
-                
                 trades.append({
                     'date': date,
                     'action': 'BUY',
@@ -126,10 +126,10 @@ def run_strategy_simulation(data, initial_investment, strategy):
                     'shares': shares,
                     'value': shares * row['Close']
                 })
-            
-            elif row['RSI'] > 70 and position == 'IN':
-                cash = shares * row['Close']
                 
+            elif row['RSI'] > 70 and shares > 0:
+                cash = shares * row['Close']
+                shares = 0
                 trades.append({
                     'date': date,
                     'action': 'SELL',
@@ -137,31 +137,27 @@ def run_strategy_simulation(data, initial_investment, strategy):
                     'shares': shares,
                     'value': cash
                 })
-                
-                shares = 0
-                position = 'OUT'
             
-            portfolio_value = cash + (shares * row['Close'])
-            portfolio_values.append(portfolio_value)
+            portfolio_values.append(cash + shares * row['Close'])
             dates.append(date)
-    
-    final_portfolio_value = cash + (shares * data['Close'].iloc[-1])
 
-    initial_price = data['Close'].iloc[0]
-    final_price = data['Close'].iloc[-1]
-    buy_hold_return = (final_price / initial_price - 1) * 100
-    strategy_return = (final_portfolio_value / initial_investment - 1) * 100
+    final_value = cash + shares * df['Close'].iloc[-1]
+    initial_price = df['Close'].iloc[0]
+    final_price = df['Close'].iloc[-1]
     
-    days = (data.index[-1] - data.index[0]).days
-    years = days / 365.25
-    annualized_return = ((1 + strategy_return/100) ** (1/years) - 1) * 100 if years > 0 else 0
+    results.update({
+        'final_value': final_value,
+        'return_pct': ((final_value / initial_investment) - 1) * 100,
+        'buy_hold_return': ((final_price / initial_price) - 1) * 100,
+        'trades': trades,
+        'portfolio_values': portfolio_values,
+        'dates': dates
+    })
+
+    total_days = (df.index[-1] - df.index[0]).days
+    if total_days > 0:
+        years = total_days / 365.25
+        annualized = ((final_value / initial_investment) ** (1/years) - 1) * 100
+        results['annualized_return'] = round(annualized, 2)
     
-    result['final_value'] = final_portfolio_value
-    result['return_pct'] = strategy_return
-    result['annualized_return'] = annualized_return
-    result['buy_hold_return'] = buy_hold_return
-    result['trades'] = trades
-    result['portfolio_values'] = portfolio_values
-    result['dates'] = dates
-    
-    return result
+    return results
