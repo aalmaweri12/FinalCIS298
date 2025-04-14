@@ -3,6 +3,12 @@ Stock data fetcher module for the stock analyzer application.
 This module handles retrieving stock data from Yahoo Finance,
 cleaning it, and preparing it for analysis.
 """
+
+import yfinance as yf
+import pandas as pd
+from datetime import datetime, timedelta
+import logging
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -118,7 +124,7 @@ def get_data_for_analysis(ticker_symbol, days=30):
         period = f"{days}d"
         hist_data = get_historical_data(ticker_symbol, period=period)
         if hist_data is None or hist_data.empty:
-            return live_data
+            return live_data, None
             
         # Calculate additional metrics for analysis
         if 'Close' in hist_data.columns:
@@ -138,6 +144,7 @@ def get_data_for_analysis(ticker_symbol, days=30):
         
     except Exception as e:
         logger.error(f"Error preparing analysis data for {ticker_symbol}: {str(e)}")
+        return None, None
 
 def validate_ticker(ticker_symbol):
     """
