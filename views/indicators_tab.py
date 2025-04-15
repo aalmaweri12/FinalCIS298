@@ -6,10 +6,6 @@ from utils.charting import MplCanvas
 
 class IndicatorsTab(QWidget):
     """Tab for displaying technical indicators"""
-    
-    def __init__(self):
-        """Initialize the indicators tab"""
-        super().__init__()
         
         # Setup layout
         self.layout = QVBoxLayout(self)
