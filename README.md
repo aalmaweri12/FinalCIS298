@@ -90,6 +90,12 @@ All dependencies are listed in requirements.txt.
 | Sami         | Indicators Logic, Models, Utils          |
 | Almo         | Charts Tab, Data Controllers, Styling    |
 
+## Commit History
+
+Commit d310a37 by Almo - Added a data controller module for fetching and processting stock data from Yahoo.
+Commit 10a9394 by Almo - Merged the updated info from the created branch
+
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
