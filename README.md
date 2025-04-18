@@ -92,8 +92,16 @@ All dependencies are listed in requirements.txt.
 
 ## Commit History
 
-Commit d310a37 by Almo - Added a data controller module for fetching and processting stock data from Yahoo.
-Commit 10a9394 by Almo - Merged the updated info from the created branch
+-Apr 3 Commit by Almo - Created a branch/Added a data controller module for fetching and processting stock data from Yahoo  
+-Apr 3 Commit by Almo - Merged the updated info from the created branch  
+-Apr 5 Commit by Almo - Created a branch/Added a simulation controller for running investment strategies  
+-Apr 5 Commit by Almo - Merged the updated info from the created branch  
+-Apr 7 Commit by Almo - Using previous branch/Improved the simulation controller  
+-Apr 7 Commit by Almo - Merged the improved simulaiton controller  
+-Apr 10 Commit by Almo - Created a branch/Added Ui styling  
+-Apr 10 Commit by Almo - Merged the light style ui  
+-Apr 15 Commit by Almo - Removed light mode and made the ui Dark mode  
+-Apr 15 Commit by Almo - Merged the improved style ui  
 
 
 ## License
