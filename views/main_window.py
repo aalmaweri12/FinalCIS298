@@ -26,7 +26,7 @@ class StockAnalysisApp(QMainWindow):
         # Application settings
         self.setWindowTitle("Enhanced Stock Analysis Tool")
         self.setGeometry(100, 100, 1200, 900)
-        set_app_style("Fusion", dark_mode=True)  # Modern dark look
+        set_app_style("Fusion")  # Modern dark look
         
         # Data storage
         self.data = None
