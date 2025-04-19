@@ -102,6 +102,60 @@ All dependencies are listed in requirements.txt.
 -Apr 10 Commit by Almo - Merged the light style ui  
 -Apr 15 Commit by Almo - Removed light mode and made the ui Dark mode  
 -Apr 15 Commit by Almo - Merged the improved style ui  
+#  Commit History - FinalCIS298
+
+##  April 18, 2025
+- Commit by **aalmaweri12** – Merged changes from main branch  
+- Commit by **aalmaweri12** – Created the team evaluation document  
+- Commit by **Almo** – Updated the README file  
+- Commit by **Almo** – Additional tweaks to the README  
+
+##  April 15, 2025
+- Commit by **Almo** – Merged feature branch: dark mode styling  
+- Commit by **Almo** – Changed entire app styling to dark mode  
+- Commit by **aalmaweri12** – Created `main.py` and initial `README.md`  
+- Commit by **alharharasami** – Updated `indicators_tab.py`  
+- Commit by **alharharasami** – Additional changes to `indicators_tab.py`  
+- Commit by **alharharasami** – Uploaded project files (1st batch)  
+- Commit by **alharharasami** – Uploaded project files (2nd batch)  
+
+##  April 14, 2025
+- Commit by **aalmaweri12** – Updated `README.md`  
+- Commit by **alharharasami** – Updated `stock_analysis.py`  
+
+##  April 11, 2025
+- Commit by **alharharasami** – Added `__init__.py`  
+- Commit by **alharharasami** – Renamed `stock_model.py` to `stock_analysis.py`  
+- Commit by **alharharasami** – Uploaded additional files  
+
+##  April 10, 2025
+- Commit by **Almo** – Merged styling branch into main  
+- Commit by **Almo** – Added light theme styling  
+
+##  April 8, 2025
+- Commit by **aalmaweri12** – Merged latest main changes  
+- Commit by **aalmaweri12** – Added analysis and simulation tabs  
+
+##  April 7, 2025
+- Commit by **Almo** – Using previous branch / Improved simulation controller  
+- Commit by **Almo** – Merged improved simulation controller  
+
+##  April 5, 2025
+- Commit by **Almo** – Setup simulation controller  
+- Commit by **Almo** – Merged simulation setup branch  
+
+##  April 4, 2025
+- Commit by **aalmaweri12** – Merged changes from main  
+- Commit by **aalmaweri12** – Created main view page  
+
+##  April 3, 2025
+- Commit by **Almo** – Finished fetching and processing stock data  
+- Commit by **Almo** – Merged data-fetching feature branch  
+
+##  April 1, 2025
+- Commit by **aalmaweri12** – Created initial file structure  
+- Commit by **aalmaweri12** – Initial commit  
+
 
 
 ## License
