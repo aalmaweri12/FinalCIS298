@@ -111,7 +111,8 @@ All dependencies are listed in requirements.txt.
 
 ##  April 14, 2025
 - Commit by **aalmaweri12** – Updated `README.md`  
-- Commit by **alharharasami** – Updated `stock_analysis.py`  
+- Commit by **alharharasami** – Updated `stock_analysis.py`
+- Commit by **aalmaweri12** – Updated `stock_analysis.py` 
 
 ##  April 11, 2025
 - Commit by **alharharasami** – Added `__init__.py`  
