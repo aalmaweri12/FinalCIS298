@@ -97,14 +97,15 @@ All dependencies are listed in requirements.txt.
 ##  April 18, 2025
 - Commit by **aalmaweri12** – Merged changes from main branch  
 - Commit by **aalmaweri12** – Created the team evaluation document  
-- Commit by **Almo** – Updated the README file  
+- Commit by **Almo** – Updated the README file
+- Commit by **alharharasami** – Updated the README file
 - Commit by **Almo** – Additional tweaks to the README  
 
 ##  April 15, 2025
 - Commit by **Almo** – Merged feature branch: dark mode styling  
 - Commit by **Almo** – Changed entire app styling to dark mode  
 - Commit by **aalmaweri12** – Created `main.py` and initial `README.md`
--  Commit by **alharharasami** – Uploaded `indicators_tab.py` 
+-  Commit by **alharharasami** – Added `indicators_tab.py` 
 - Commit by **alharharasami** – Updated `indicators_tab.py`  
 - Commit by **alharharasami** – Additional changes to `indicators_tab.py`  
 - Commit by **alharharasami** – Uploaded project files (1st batch)  
@@ -113,10 +114,11 @@ All dependencies are listed in requirements.txt.
 ##  April 14, 2025
 - Commit by **aalmaweri12** – Updated `README.md`  
 - Commit by **alharharasami** – Updated `stock_analysis.py`
-- Commit by **aalmaweri12** – Updated `stock_analysis.py` 
+- Commit by **alharharasami** – Added `charting.py`
 
 ##  April 11, 2025
-- Commit by **alharharasami** – Added `__init__.py`  
+- Commit by **alharharasami** – Added `__init__.py`
+- Commit by **alharharasami** – Added `stock_model.py`
 - Commit by **alharharasami** – Renamed `stock_model.py` to `stock_analysis.py`  
 - Commit by **alharharasami** – Uploaded additional files  
 
