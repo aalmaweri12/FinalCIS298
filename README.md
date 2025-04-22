@@ -103,7 +103,8 @@ All dependencies are listed in requirements.txt.
 ##  April 15, 2025
 - Commit by **Almo** – Merged feature branch: dark mode styling  
 - Commit by **Almo** – Changed entire app styling to dark mode  
-- Commit by **aalmaweri12** – Created `main.py` and initial `README.md`  
+- Commit by **aalmaweri12** – Created `main.py` and initial `README.md`
+-  Commit by **alharharasami** – Uploaded `indicators_tab.py` 
 - Commit by **alharharasami** – Updated `indicators_tab.py`  
 - Commit by **alharharasami** – Additional changes to `indicators_tab.py`  
 - Commit by **alharharasami** – Uploaded project files (1st batch)  
